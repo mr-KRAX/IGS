@@ -128,9 +128,12 @@ void DrawTask2Obj2(HWND hwnd) {
   SetTextColor(hdc, RGB(255,255,255));
   TextOut(hdc, XToN(0) - 45, YToM(0)-10, L"Octagtam", 8);
 
+  DeleteObject(bgBrush);
+  DeleteObject(bgPen);
+  DeleteObject(axisPen);
+  DeleteObject(objPen);
+  DeleteObject(objBrush);
   
-
-
   ReleaseDC(hwnd, hdc);
 }
 
