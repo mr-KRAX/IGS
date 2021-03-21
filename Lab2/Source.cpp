@@ -10,28 +10,28 @@ using namespace std;
 TCHAR winClassName[] = _T("Class");
 TCHAR winTitle[] = _T("Lab2 - Astroid");
 
-// размеры поля вывода в мировой системе координат
+// СЂР°Р·РјРµСЂС‹ РїРѕР»СЏ РІС‹РІРѕРґР° РІ РјРёСЂРѕРІРѕР№ СЃРёСЃС‚РµРјРµ РєРѕРѕСЂРґРёРЅР°С‚
 double xLeft = -5;
 double xRight = 5;
 double yBottom = -5;
 double yTop = 5;
 
-// размеры окна
+// СЂР°Р·РјРµСЂС‹ РѕРєРЅР°
 int winHeight = 500;
 int winWidth = 700;
 
-// размеры поля вывода в пикселях в клиентской области окна приложения
+// СЂР°Р·РјРµСЂС‹ РїРѕР»СЏ РІС‹РІРѕРґР° РІ РїРёРєСЃРµР»СЏС… РІ РєР»РёРµРЅС‚СЃРєРѕР№ РѕР±Р»Р°СЃС‚Рё РѕРєРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ
 int nLeft = 35;
 int nRight = winWidth - 35;
 int mBottom = winHeight - 35;
 int mTop = 35;
 
-//переход от x к пикселю n
+//РїРµСЂРµС…РѕРґ РѕС‚ x Рє РїРёРєСЃРµР»СЋ n
 inline int XToN(double x) {
   return (int)((x - xLeft) / (xRight - xLeft) * (nRight - nLeft)) + nLeft;
 }
 
-//переход от y к пикселю m
+//РїРµСЂРµС…РѕРґ РѕС‚ y Рє РїРёРєСЃРµР»СЋ m
 inline int YToM(double y) {
   return (int)((y - yBottom) / (yTop - yBottom) * (mTop - mBottom)) + mBottom;
 }
@@ -44,20 +44,20 @@ struct Vector2 {
 void DrawFigure(HWND hwnd) {
   //SetWindowText(hwnd, L"");
   //ClearWin(hwnd);
-  PAINTSTRUCT ps;        //структура для работы контеста
+  PAINTSTRUCT ps;        //СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ СЂР°Р±РѕС‚С‹ РєРѕРЅС‚РµСЃС‚Р°
   HDC hdc = BeginPaint(hwnd, &ps);
   POINT pt;
-  //HDC hdc = GetDC(hwnd); //дескриптор контекста устройства
+  //HDC hdc = GetDC(hwnd); //РґРµСЃРєСЂРёРїС‚РѕСЂ РєРѕРЅС‚РµРєСЃС‚Р° СѓСЃС‚СЂРѕР№СЃС‚РІР°
 
-  // Устанавливаем кисти
-  HBRUSH bgBrush = CreateSolidBrush(RGB(0, 0, 200));       // сплошной, синий
-  HPEN bgPen = CreatePen(PS_SOLID, 3, RGB(255, 255, 0));   // 3px, сплошной, ярко-желтый
-  HPEN axisPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));     // 2px, сплошной, черный
-  HPEN f1Pen = CreatePen(PS_SOLID, 3, RGB(255, 0, 0));     // 2px, сплошной, ярко-красный
-  HBRUSH frBrush = CreateSolidBrush(RGB(0, 255, 0));       // сплошной, зеленый
-  HBRUSH frHathcBrush = CreateHatchBrush(HS_CROSS,RGB(100, 100, 200)); // клетка, сине-голубой
+  // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРёСЃС‚Рё
+  HBRUSH bgBrush = CreateSolidBrush(RGB(0, 0, 200));       // СЃРїР»РѕС€РЅРѕР№, СЃРёРЅРёР№
+  HPEN bgPen = CreatePen(PS_SOLID, 3, RGB(255, 255, 0));   // 3px, СЃРїР»РѕС€РЅРѕР№, СЏСЂРєРѕ-Р¶РµР»С‚С‹Р№
+  HPEN axisPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));     // 2px, СЃРїР»РѕС€РЅРѕР№, С‡РµСЂРЅС‹Р№
+  HPEN f1Pen = CreatePen(PS_SOLID, 3, RGB(255, 0, 0));     // 2px, СЃРїР»РѕС€РЅРѕР№, СЏСЂРєРѕ-РєСЂР°СЃРЅС‹Р№
+  HBRUSH frBrush = CreateSolidBrush(RGB(0, 255, 0));       // СЃРїР»РѕС€РЅРѕР№, Р·РµР»РµРЅС‹Р№
+  HBRUSH frHathcBrush = CreateHatchBrush(HS_CROSS,RGB(100, 100, 200)); // РєР»РµС‚РєР°, СЃРёРЅРµ-РіРѕР»СѓР±РѕР№
 
-  // Отрисовка области вывода
+  // РћС‚СЂРёСЃРѕРІРєР° РѕР±Р»Р°СЃС‚Рё РІС‹РІРѕРґР°
   POINT trg[3];
   trg[0].x = nLeft;
   trg[0].y = mBottom;
@@ -70,7 +70,7 @@ void DrawFigure(HWND hwnd) {
   SelectClipRgn(hdc, hrgn);
   FillRgn(hdc, hrgn, frHathcBrush);
 
-  // Отрисовка осей
+  // РћС‚СЂРёСЃРѕРІРєР° РѕСЃРµР№
   SelectObject(hdc, axisPen);
   // OX
   MoveToEx(hdc, XToN(xLeft), YToM(0), &pt);
@@ -79,7 +79,7 @@ void DrawFigure(HWND hwnd) {
   MoveToEx(hdc, XToN(0), YToM(yBottom), &pt);
   LineTo(hdc, XToN(0), YToM(yTop));
 
-  // Расчет функции 
+  // Р Р°СЃС‡РµС‚ С„СѓРЅРєС†РёРё 
   list<Vector2> f;
   double x, y;
   float maxPhi = 2 * M_PI;
@@ -90,7 +90,7 @@ void DrawFigure(HWND hwnd) {
     f.push_back({x, y});
   }
 
-  // Отрисовка функции
+  // РћС‚СЂРёСЃРѕРІРєР° С„СѓРЅРєС†РёРё
   SelectObject(hdc, f1Pen);
   int n, m;
   n = XToN(f.begin()->x);
@@ -104,7 +104,7 @@ void DrawFigure(HWND hwnd) {
     LineTo(hdc, n, m);
   }
 
-  // Отрисовка рамки
+  // РћС‚СЂРёСЃРѕРІРєР° СЂР°РјРєРё
   SelectObject(hdc, frBrush);
   FrameRgn(hdc, hrgn, frBrush, 3, 3);
 
@@ -139,36 +139,36 @@ int WINAPI WinMain(HINSTANCE hInstance,
   LPSTR lpCmdParam,
   int nCmdShow) {
 
-  // Регистрация класса окна приложения
+  // Р РµРіРёСЃС‚СЂР°С†РёСЏ РєР»Р°СЃСЃР° РѕРєРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ
   WNDCLASS wc;
 
   wc.style = 0;
-  wc.lpfnWndProc = (WNDPROC)WndProc; //функция окна
+  wc.lpfnWndProc = (WNDPROC)WndProc; //С„СѓРЅРєС†РёСЏ РѕРєРЅР°
   wc.cbClsExtra = 0;
   wc.cbWndExtra = 0;
-  wc.hInstance = hInstance; //дескриптор приложения
+  wc.hInstance = hInstance; //РґРµСЃРєСЂРёРїС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ
   wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
   wc.hCursor = LoadCursor(NULL, IDC_ARROW);
   wc.hbrBackground = (HBRUSH)GetStockObject(LTGRAY_BRUSH);
   wc.lpszMenuName = 0;
-  wc.lpszClassName = winClassName; //имя класса окна
+  wc.lpszClassName = winClassName; //РёРјСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
 
   if (!RegisterClass(&wc))
     return 0;
 
-  // Cоздание окна приложения
+  // CРѕР·РґР°РЅРёРµ РѕРєРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ
   HWND hWnd;
 
-  hWnd = CreateWindow(winClassName,               // имя класса окна
-    winTitle,                   // заголовок окна
-    WS_OVERLAPPED | WS_SYSMENU, // стиль окна
+  hWnd = CreateWindow(winClassName,               // РёРјСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
+    winTitle,                   // Р·Р°РіРѕР»РѕРІРѕРє РѕРєРЅР°
+    WS_OVERLAPPED | WS_SYSMENU, // СЃС‚РёР»СЊ РѕРєРЅР°
     0,                          // x
     0,                          // y
     winWidth + 17,              // Width
     winHeight + 39 + 20,        // Height
-    NULL,                       // дескриптор окна-родителя
-    NULL,                       // дескриптор меню
-    hInstance,                  // дескриптор приложения
+    NULL,                       // РґРµСЃРєСЂРёРїС‚РѕСЂ РѕРєРЅР°-СЂРѕРґРёС‚РµР»СЏ
+    NULL,                       // РґРµСЃРєСЂРёРїС‚РѕСЂ РјРµРЅСЋ
+    hInstance,                  // РґРµСЃРєСЂРёРїС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ
     NULL);
 
   if (!hWnd)
@@ -177,11 +177,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
   ShowWindow(hWnd, nCmdShow);
   UpdateWindow(hWnd);
 
-  // Цикл обработки сообщений
+  // Р¦РёРєР» РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№
   MSG msg;
   while (GetMessage(&msg, NULL, 0, 0)) {
     TranslateMessage(&msg);
-    DispatchMessage(&msg); // Посылает сообщение функции WndProc()
+    DispatchMessage(&msg); // РџРѕСЃС‹Р»Р°РµС‚ СЃРѕРѕР±С‰РµРЅРёРµ С„СѓРЅРєС†РёРё WndProc()
   }
   return 0;
 }
