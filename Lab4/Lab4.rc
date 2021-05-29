@@ -1,0 +1,4 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource1.h"
+BitmapShip BITMAP "ship_24b.bmp"
