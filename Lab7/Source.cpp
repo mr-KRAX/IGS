@@ -216,7 +216,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg,
 
 //глобальные переменые
 //число элементарный B-сплайновых поверхностей Nelm x Melm
-const int Nelm = 4, Melm = 6;
+const int Nelm = 10, Melm = 10;
 //число опорных векторов Np x Mp
 const int Np = Nelm + 3, Mp = Melm + 3;
 
